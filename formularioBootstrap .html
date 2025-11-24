@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario</title>
+
+ 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body class="bg-light py-4">
+
+<div class="container bg-white p-4 rounded shadow" style="max-width: 900px;">
+  <h2 class="text-center mb-4">Formulario con Bootstrap</h2>
+
+  <form id="formulario">
+
+
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" required minlength="2">
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Apellido:</label>
+        <input type="text" class="form-control" id="apellido" required>
+      </div>
+    </div>
+
+
+
+
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Correo:</label>
+        <input type="email" class="form-control" id="correo" required>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Edad:</label>
+        <input type="number" class="form-control" id="edad" min="1" max="100" required>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Teléfono:</label>
+        <input type="tel" class="form-control" id="telefono" maxlength="10" required>
+      </div>
+    </div>
+
+
+   
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Género:</label>
+        <select class="form-select" id="genero">
+          <option value="">Seleccione...</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Color Favorito:</label>
+        <input type="color" class="form-control form-control-color" id="color">
+      </div>
+    </div>
+
+
+ 
+    <div class="row">
+      <!-- RADIO -->
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Nivel de Estudio:</label><br>
+
+        <div class="form-check">
+          <input type="radio" class="form-check-input" name="estudio" value="Primaria">
+          <label class="form-check-label">Primaria</label>
+        </div>
+
+        <div class="form-check">
+          <input type="radio" class="form-check-input" name="estudio" value="Secundaria">
+          <label class="form-check-label">Secundaria</label>
+        </div>
+
+        <div class="form-check">
+          <input type="radio" class="form-check-input" name="estudio" value="Universidad">
+          <label class="form-check-label">Universidad</label>
+        </div>
+      </div>
+
+      <!-- CHECKBOX -->
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Intereses:</label><br>
+
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" value="Música">
+          <label class="form-check-label">Música</label>
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" value="Deporte">
+          <label class="form-check-label">Deporte</label>
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" value="Lectura">
+          <label class="form-check-label">Lectura</label>
+        </div>
+      </div>
+    </div>
+
+
+    
+    <div class="mb-3">
+      <label class="form-label">Comentario:</label>
+      <textarea class="form-control" id="comentario" rows="3"></textarea>
+    </div>
+
+    <!-- ACEPTAR -->
+    <div class="form-check mb-3">
+      <input type="checkbox" class="form-check-input" id="terminos" required>
+      <label class="form-check-label">Acepto los términos y condiciones</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Enviar</button>
+
+  </form>
+
+  <pre class="mt-4 p-3 bg-light border rounded" id="resultado"></pre>
+
+</div>
+
+<script>
+document.getElementById("formulario").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombre").value;
+  const apellido = document.getElementById("apellido").value;
+  const correo = document.getElementById("correo").value;
+  const edad = document.getElementById("edad").value;
+  const telefono = document.getElementById("telefono").value;
+  const genero = document.getElementById("genero").value;
+  const color = document.getElementById("color").value;
+  const comentario = document.getElementById("comentario").value;
+
+  const estudio = document.querySelector("input[name='estudio']:checked")?.value || "No seleccionado";
+
+  const intereses = [];
+  document.querySelectorAll("input[type='checkbox']:checked").forEach(ch => {
+    intereses.push(ch.value);
+  });
+
+  const salida = `
+  Nombre: ${nombre}
+  Apellido: ${apellido}
+  Correo: ${correo}
+  Edad: ${edad}
+  Teléfono: ${telefono}
+  Género: ${genero}
+  Color favorito: ${color}
+  Nivel de estudio: ${estudio}
+  Intereses: ${intereses.join(", ") || "Ninguno"}
+  Comentario: ${comentario}
+  `;
+
+  document.getElementById("resultado").textContent = salida;
+});
+</script>
+
+</body>
+</html>
